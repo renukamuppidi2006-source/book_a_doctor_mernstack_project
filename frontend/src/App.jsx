@@ -10,6 +10,15 @@ import Doctors from "./pages/Doctors"
 import Appointment from "./pages/Appointment"
 import MyAppointments from "./pages/MyAppointments"
 import Settings from "./pages/Settings"
+import ChatBot from "./pages/ChatBot"
+import VideoCall from "./pages/VideoCall"
+
+import VoiceBot from "./components/VoiceBot"
+
+import { Toaster } from "react-hot-toast"
+import MedicalReports from "./pages/MedicalReports"
+
+import EmergencySOS from "./pages/EmergencySOS"
 
 function App() {
 
@@ -33,11 +42,26 @@ function App() {
 
         <Route path="/appointment" element={<Appointment />} />
 
-        <Route path="/myappointments" element={<MyAppointments />} />
+        <Route
+          path="/myappointments"
+          element={<MyAppointments />}
+        />
 
         <Route path="/settings" element={<Settings />} />
 
+        <Route path="/chatbot" element={<ChatBot />} />
+
+        <Route path="/videocall" element={<VideoCall />} />
+
+        <Route path="/reports" element={<MedicalReports />} />
+
+        <Route path="/emergency" element={<EmergencySOS />} />
+
       </Routes>
+
+      <VoiceBot />
+
+      <Toaster />
 
     </BrowserRouter>
 

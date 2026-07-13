@@ -8,6 +8,11 @@ import connectDB from "./config/db.js"
 import doctorRoutes from "./routes/doctorRoutes.js"
 
 import appointmentRoutes from "./routes/appointmentRoutes.js"
+const uploadRoutes = require("./routes/uploadRoutes")
+const path = require("path")
+
+
+
 
 dotenv.config()
 
@@ -26,7 +31,8 @@ app.get("/", (req, res) => {
 app.use("/api/doctors", doctorRoutes)
 app.use("/api/users", userRoutes)
 app.use("/api/appointments", appointmentRoutes)
-
+app.use("/api", uploadRoutes)
+app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 const PORT = process.env.PORT || 8000
 
 app.listen(PORT, () => {

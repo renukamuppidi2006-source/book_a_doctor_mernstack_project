@@ -182,3 +182,20 @@
     border-right-color: var(--border);
   }
 }
+.dark {
+  background: #0f172a;
+  color: white;
+}
+
+.dark .card {
+  background: #1e293b;
+  color: white;
+}
+
+.dark .navbar {
+  background: #111827;
+}
+
+.dark .text-gray-500 {
+  color: #cbd5e1 !important;
+}

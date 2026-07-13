@@ -1,42 +1,33 @@
 import Appointment from "../models/Appointment.js"
 
-export const createAppointment = async (req, res) => {
+export const createAppointment = async (req,res)=>{
 
-  try {
+    try{
 
-    const appointment = await Appointment.create(req.body)
+        const appointment = await Appointment.create(req.body)
 
-    res.status(201).json({
-      success: true,
-      message: "Appointment Booked",
-      appointment
-    })
+        res.status(201).json(appointment)
 
-  } catch (error) {
+    }catch(err){
 
-    res.status(500).json({
-      success: false,
-      message: error.message
-    })
+        res.status(500).json({message:err.message})
 
-  }
+    }
 
 }
 
-export const getAppointments = async (req, res) => {
+export const getAppointments = async(req,res)=>{
 
-  try {
+    try{
 
-    const appointments = await Appointment.find()
+        const appointments = await Appointment.find()
 
-    res.json(appointments)
+        res.json(appointments)
 
-  } catch (error) {
+    }catch(err){
 
-    res.status(500).json({
-      message: error.message
-    })
+        res.status(500).json({message:err.message})
 
-  }
+    }
 
 }

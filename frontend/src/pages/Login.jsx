@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
 
 const Login = () => {
 
@@ -9,6 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState("")
 
   const handleLogin = (e) => {
+    toast.success("Login Successful 🎉")
 
     e.preventDefault()
 
