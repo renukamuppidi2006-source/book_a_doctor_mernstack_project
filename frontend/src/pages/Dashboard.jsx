@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
+import VoiceBot from "../components/VoiceBot";
 
 const Dashboard = () => {
 

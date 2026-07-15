@@ -1,95 +1,106 @@
-import React from "react";
-
+import { useState } from "react";
 import SpeechRecognition, {
-  useSpeechRecognition
+  useSpeechRecognition,
 } from "react-speech-recognition";
-
-import { useNavigate } from "react-router-dom";
 
 const VoiceBot = () => {
 
-  const navigate = useNavigate();
-
-  const commands = [
-
-    {
-      command: "open dashboard",
-      callback: () => navigate("/dashboard"),
-    },
-
-    {
-      command: "open doctors",
-      callback: () => navigate("/doctors"),
-    },
-
-    {
-      command: "open appointments",
-      callback: () => navigate("/myappointments"),
-    },
-
-    {
-      command: "open settings",
-      callback: () => navigate("/settings"),
-    },
-
-    {
-      command: "go home",
-      callback: () => navigate("/"),
-    },
-
-  ];
+  const [open, setOpen] = useState(false);
 
   const {
     transcript,
     listening,
-    browserSupportsSpeechRecognition
-  } = useSpeechRecognition({ commands });
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
 
   if (!browserSupportsSpeechRecognition) {
-    return <span>Browser not supported</span>;
+    return null;
   }
 
   return (
+    <>
 
-    <div className="fixed bottom-5 right-5 z-50">
-
-      <button
-
-        onClick={() => SpeechRecognition.startListening()}
-
-        className="bg-blue-600 text-white px-6 py-4 rounded-full text-xl shadow-xl"
-      >
-
-        🎤 Start
-
-      </button>
+      {/* Floating Button */}
 
       <button
-
-        onClick={() => SpeechRecognition.stopListening()}
-
-        className="bg-red-500 text-white px-6 py-4 rounded-full text-xl ml-3 shadow-xl"
+        onClick={() => setOpen(!open)}
+        className="fixed bottom-8 right-8 z-50
+        w-16 h-16 rounded-full
+        bg-gradient-to-r from-cyan-500 to-blue-600
+        text-3xl
+        shadow-[0_0_30px_rgba(6,182,212,0.7)]
+        hover:scale-110
+        transition duration-300"
       >
-
-        Stop
-
+        🤖
       </button>
 
-      <div className="bg-white p-4 mt-3 rounded-2xl shadow-xl w-72">
+      {/* Popup */}
 
-        <h1 className="text-black text-xl font-bold">
-          Listening: {listening ? "ON" : "OFF"}
-        </h1>
+      {open && (
 
-        <p className="text-black mt-2">
-          {transcript}
-        </p>
+        <div
+          className="fixed bottom-28 right-8
+          w-80
+          bg-[#111827]/95
+          backdrop-blur-xl
+          rounded-3xl
+          border border-cyan-500
+          shadow-2xl
+          p-6
+          z-50"
+        >
 
-      </div>
+          <h2 className="text-white text-xl font-bold mb-4">
+            🤖 AI Voice Assistant
+          </h2>
 
-    </div>
+          <p className="text-cyan-400 mb-4">
+
+            {listening
+              ? "🎤 Listening..."
+              : "🎤 Click Start"}
+
+          </p>
+
+          <div className="flex gap-3">
+
+            <button
+              onClick={SpeechRecognition.startListening}
+              className="flex-1 bg-cyan-500 hover:bg-cyan-600 text-white py-3 rounded-xl"
+            >
+              Start
+            </button>
+
+            <button
+              onClick={SpeechRecognition.stopListening}
+              className="flex-1 bg-red-500 hover:bg-red-600 text-white py-3 rounded-xl"
+            >
+              Stop
+            </button>
+
+          </div>
+
+          <div className="mt-5">
+
+            <p className="text-gray-400 text-sm">
+              Command
+            </p>
+
+            <div className="bg-slate-800 rounded-xl mt-2 p-3 text-white min-h-[60px]">
+              {transcript || "Say: Open Dashboard"}
+            </div>
+
+          </div>
+
+        </div>
+
+      )}
+
+    </>
 
   );
+
 };
 
 export default VoiceBot;

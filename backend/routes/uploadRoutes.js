@@ -1,20 +1,13 @@
-const express = require("express")
+import express from "express";
+import upload from "../middlewares/upload.js";
 
-const router = express.Router()
+const router = express.Router();
 
-const upload = require("../middleware/upload")
+router.post("/upload", upload.single("report"), (req, res) => {
+  res.json({
+    success: true,
+    file: req.file,
+  });
+});
 
-router.post(
-  "/upload",
-  upload.single("report"),
-  (req, res) => {
-
-    res.json({
-      success: true,
-      file: req.file,
-    })
-
-  }
-)
-
-module.exports = router
+export default router;
