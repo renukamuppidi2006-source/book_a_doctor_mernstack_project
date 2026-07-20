@@ -60,3 +60,5 @@ The workspace is organized into three major folders to optimize auditing, docume
 - **Doctor Account**: `richard@bookadoctor.com` / Password: `password123`
 - **Admin Account**: `admin@bookadoctor.com` / Password: `adminpassword123`
 - **Patient Account**: You can register a new patient directly from the login page!
+
+
